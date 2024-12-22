@@ -112,9 +112,9 @@ export class JustaName {
 
     const siweConfig = configuration.config
       ? {
-          domain: configuration.config.domain,
-          origin: configuration.config.origin,
-        }
+        domain: configuration.config.domain,
+        origin: configuration.config.origin,
+      }
       : undefined;
 
     const subnameChallenge = new SubnameChallenge({
@@ -256,19 +256,9 @@ export class JustaName {
           }
         }
 
-        const provider = getJsonRpcProvider(network.providerUrl);
-        provider.getNetwork().then((_network) => {
-          if (network.chainId.toString() !== _network.chainId.toString()) {
-            throw new InvalidConfigurationException(
-              'The chainId does not match the chainId of the providerUrl'
-            );
-          }
-
-          providerUrlChainIdMap.set(
-            network.providerUrl,
-            parseInt(_network.chainId.toString())
-          );
-        });
+        providerUrlChainIdMap.set(
+          network.providerUrl,
+          parseInt(network.chainId.toString()));
       });
     }
   }
